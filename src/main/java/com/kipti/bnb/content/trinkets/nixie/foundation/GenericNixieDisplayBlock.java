@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.trinkets.nixie.nixie_board.NixieBoardBlockNixie;
 import com.kipti.bnb.registry.content.blocks.BnbTrinketBlocks;
-import com.mojang.serialization.MapCodec;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.infrastructure.component.ClipboardEntry;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
@@ -47,7 +46,6 @@ import java.util.Objects;
  */
 public class GenericNixieDisplayBlock extends DirectionalBlock implements IWrenchable {
 
-    public static final MapCodec<GenericNixieDisplayBlock> CODEC = simpleCodec(GenericNixieDisplayBlock::new);
 
     public static final EnumProperty<Direction> ORIENTATION = EnumProperty.create("orientation", Direction.class);
 
@@ -212,10 +210,6 @@ public class GenericNixieDisplayBlock extends DirectionalBlock implements IWrenc
         }
     }
 
-    @Override
-    protected @NotNull MapCodec<? extends DirectionalBlock> codec() {
-        return CODEC;
-    }
 
 }
 

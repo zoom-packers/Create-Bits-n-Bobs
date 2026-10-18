@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.scenes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.foundation.display.BnbDynamicComponent;
 import com.kipti.bnb.foundation.ponder.PonderBlockEntityIO;
 import com.kipti.bnb.content.trinkets.nixie.foundation.DoubleOrientedDirections;
@@ -37,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-@Environment(EnvType.CLIENT)
 public class NixieDisplayScenes {
 
     private static final ItemStack CLIPBOARD_WITH_CONTENT = makeFilledClipboard();

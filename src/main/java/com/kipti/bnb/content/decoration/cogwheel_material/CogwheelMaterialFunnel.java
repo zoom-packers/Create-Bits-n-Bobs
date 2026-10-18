@@ -1,8 +1,6 @@
 package com.kipti.bnb.content.decoration.cogwheel_material;
 
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
  * call, so the funnel moved to the two places that extract block entity render states: the vanilla dispatcher for
  * world block entities and Create's {@code BlockEntityRenderHelper} for contraption block entities.
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelMaterialFunnel {
 
     private CogwheelMaterialFunnel() {

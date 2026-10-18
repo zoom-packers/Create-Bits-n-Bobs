@@ -8,8 +8,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,7 +25,6 @@ public record CogwheelChainRidingBroadcastPacket(
             );
 
     @Override
-    @Environment(EnvType.CLIENT)
     public void handle(final LocalPlayer player) {
         PlayerSkyhookRendererBridge.updateBnbHangingPlayers(this.ridingPlayerUUIDs);
     }

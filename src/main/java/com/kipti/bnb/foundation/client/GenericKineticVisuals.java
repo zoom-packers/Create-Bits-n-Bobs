@@ -7,8 +7,6 @@ import com.zurrtum.create.client.flywheel.api.visualization.VisualizationContext
 import com.zurrtum.create.client.flywheel.lib.model.Models;
 import com.zurrtum.create.client.flywheel.lib.model.baked.PartialModel;
 import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 /**
  * The visual factory for block entities whose model is looked up per block in
@@ -16,7 +14,6 @@ import net.fabricmc.api.Environment;
  * Fabric that lambda's body would have to be verified while the dedicated server loads that class, so it lives in a
  * client-only class and is referenced only as a method handle.
  */
-@Environment(EnvType.CLIENT)
 public final class GenericKineticVisuals {
 
     private GenericKineticVisuals() {

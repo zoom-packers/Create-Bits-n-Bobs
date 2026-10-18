@@ -8,8 +8,6 @@ import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
 import com.zurrtum.create.client.AllModels;
 import com.zurrtum.create.client.catnip.render.SpriteShiftEntry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.core.BlockPos;
@@ -27,7 +25,6 @@ import java.util.function.BiFunction;
  * Wrappers are composed onto whatever Create Fly already registered for the block rather than replacing it, so the
  * pipes keep their attachment model and the tank keeps its connected textures.
  */
-@Environment(EnvType.CLIENT)
 public final class BnbDyeableModels {
 
     private BnbDyeableModels() {

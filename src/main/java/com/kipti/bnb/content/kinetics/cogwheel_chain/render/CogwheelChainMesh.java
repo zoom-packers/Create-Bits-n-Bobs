@@ -3,8 +3,6 @@ package com.kipti.bnb.content.kinetics.cogwheel_chain.render;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.graph.CogwheelChain;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.render.CogwheelChainRenderGeometryBuilder.ChainSegment;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.types.CogwheelChainType;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -17,7 +15,6 @@ import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainMesh {
 
     private final float[] positions;

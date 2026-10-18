@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.instruction;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.behaviour.CogwheelChainBehaviour;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.graph.CogwheelChain;
@@ -16,7 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.ArrayList;
 
-@Environment(EnvType.CLIENT)
 public class ConveyChainRotationsInstruction extends PonderInstruction {
 
     private final BlockPos chainStartLocation;

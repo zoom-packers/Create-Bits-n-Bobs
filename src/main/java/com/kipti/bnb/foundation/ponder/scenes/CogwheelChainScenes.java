@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.scenes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.foundation.ponder.instruction.ExpandingOutlineInstruction;
 import com.kipti.bnb.foundation.ponder.instruction.ConveyChainRotationsInstruction;
 import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
@@ -18,7 +16,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
 public class CogwheelChainScenes {
 
     public static void flatCogwheelChain(final SceneBuilder builder, final SceneBuildingUtil util) {

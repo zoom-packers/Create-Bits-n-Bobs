@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.instruction;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.decoration.dyeable.pipes.DyeablePipeBehaviour;
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
@@ -17,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Changes the dye color on a pipe in the world to a dye or null (no dye), will update the block shape too
  */
-@Environment(EnvType.CLIENT)
 public class DyePipeInstruction extends PonderInstruction {
 
     private final BlockPos pipePos;

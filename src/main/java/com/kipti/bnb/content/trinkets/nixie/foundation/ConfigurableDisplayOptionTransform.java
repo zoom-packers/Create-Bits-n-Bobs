@@ -1,12 +1,9 @@
 package com.kipti.bnb.content.trinkets.nixie.foundation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import java.util.function.Consumer;
 
-@Environment(EnvType.CLIENT)
 public enum ConfigurableDisplayOptionTransform {
     NONE(1, 1, 0.9f),
     ALWAYS_UP(1, 1, 0.9f),

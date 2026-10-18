@@ -4,7 +4,6 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.util.RandomSource;
 import com.kipti.bnb.registry.content.BnbShapes;
 import com.kipti.bnb.registry.content.BnbBlockEntities;
-import com.mojang.serialization.MapCodec;
 import com.zurrtum.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ThrottleLeverBlock extends Block implements IBE<ThrottleLeverBlockEntity> {
 
-    public static final MapCodec<ThrottleLeverBlock> CODEC = simpleCodec(ThrottleLeverBlock::new);
 
     public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -45,10 +43,6 @@ public class ThrottleLeverBlock extends Block implements IBE<ThrottleLeverBlockE
                                           .setValue(BlockStateProperties.POWER, 0));
     }
 
-    @Override
-    protected MapCodec<? extends ThrottleLeverBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
@@ -107,7 +101,7 @@ public class ThrottleLeverBlock extends Block implements IBE<ThrottleLeverBlockE
     }
 
     @Override
-    protected VoxelShape getShape(final BlockState state,
+    public VoxelShape getShape(final BlockState state,
                                   final BlockGetter level,
                                   final BlockPos pos,
                                   final CollisionContext context) {
@@ -159,7 +153,7 @@ public class ThrottleLeverBlock extends Block implements IBE<ThrottleLeverBlockE
     }
 
     @Override
-    protected BlockState rotate(final BlockState state, final Rotation rotation) {
+    public BlockState rotate(final BlockState state, final Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 

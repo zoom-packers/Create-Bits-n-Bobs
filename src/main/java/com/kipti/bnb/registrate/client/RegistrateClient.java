@@ -19,8 +19,6 @@ import com.zurrtum.create.client.AllBlockEntityRenders;
 import com.zurrtum.create.client.AllEntityRenders;
 import com.zurrtum.create.client.flywheel.lib.visualization.SimpleBlockEntityVisualizer;
 import com.zurrtum.create.client.flywheel.lib.visualization.SimpleEntityVisualizer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -39,7 +37,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
 public final class RegistrateClient implements ClientHookSink {
     private RegistrateClient() {
     }

@@ -70,9 +70,9 @@ public class FlywheelMovementMechanics {
      * Reads the fields directly from the tag, be sure not to conflict
      */
     public void readAdditional(final ValueInput compound, final boolean clientPacket) {
-//        if (compound.contains("MaxAngularVelocity"))
+//        if (compound.keySet().contains("MaxAngularVelocity"))
 //            maxAngularVelocity = compound.getFloatOr("MaxAngularVelocity", 0f);
-        if (compound.contains("AngularVelocity"))
+        if (compound.keySet().contains("AngularVelocity"))
             angularVelocity = compound.getFloatOr("AngularVelocity", 0f);
 
         if (BnbServerSettings.flywheelStorageCapability()) {

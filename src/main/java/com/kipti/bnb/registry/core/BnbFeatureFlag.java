@@ -11,7 +11,7 @@ import com.kipti.bnb.registrate.entry.BlockEntry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.fabricmc.loader.api.FabricLoader;
+import com.zurrtum.create.neoforge.Platform;
 import com.kipti.bnb.foundation.data.Lazy;
 
 import java.util.ArrayList;
@@ -288,7 +288,7 @@ public enum BnbFeatureFlag {
     }
 
     public static boolean isDevEnvironment() {
-        return FabricLoader.getInstance().isDevelopmentEnvironment();
+        return !net.neoforged.fml.loading.FMLLoader.getCurrent().isProduction();
     }
 
     private static boolean checkFlags(final Predicate<BnbFeatureFlag> flagPredicate,

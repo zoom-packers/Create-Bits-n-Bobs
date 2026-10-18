@@ -7,8 +7,6 @@ import com.kipti.bnb.foundation.client.ModelSprites;
 import com.kipti.bnb.foundation.client.QuadRotator;
 import com.kipti.bnb.registry.client.BnbPartialModels;
 import com.zurrtum.create.client.foundation.model.BakedModelHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
@@ -29,7 +27,6 @@ import java.util.List;
  * <p>
  * The geometry is built facing up with no rotation, so one buffer serves headlamps on any face.
  */
-@Environment(EnvType.CLIENT)
 public class HeadlampModelBuilder {
 
     public static List<BakedQuad> buildHeadlampGeometry(final long renderState) {

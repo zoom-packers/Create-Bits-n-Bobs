@@ -10,8 +10,6 @@ import com.kipti.bnb.content.kinetics.cogwheel_chain.placement.CogwheelChainPlac
 import com.kipti.bnb.content.kinetics.cogwheel_chain.world.CogwheelChainWorld;
 import com.zurrtum.create.client.content.equipment.blueprint.BlueprintOverlayRenderer;
 import com.zurrtum.create.content.kinetics.chainConveyor.ChainConveyorBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -32,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 import static com.kipti.bnb.content.kinetics.cogwheel_chain.placement.ChainDriveDisplayRenderer.INVALID_COLOUR;
 import static com.kipti.bnb.content.kinetics.cogwheel_chain.placement.ChainDriveDisplayRenderer.VALID_COLOUR;
 
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainPartialEditDisplayHandler {
 
     private CogwheelChainPartialEditDisplayHandler() {

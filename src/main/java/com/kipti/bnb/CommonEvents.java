@@ -5,28 +5,42 @@ import com.kipti.bnb.content.kinetics.cogwheel_chain.riding.ServerCogwheelChainR
 import com.kipti.bnb.foundation.caching.LevelSafeStorage;
 import com.kipti.bnb.foundation.caching.LevelSimpleCache;
 import com.kipti.bnb.foundation.command.BnbCommands;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLevelEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import com.kipti.bnb.network.BnbNetwork;
 import com.kipti.bnb.network.packets.to_client.ServerConfigPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 public final class CommonEvents {
 
     private CommonEvents() {
     }
 
+    // NeoForge: Fabric API's server events, mapped to NeoForge's game bus
     public static void register() {
-        ServerTickEvents.END_SERVER_TICK.register(server -> ServerCogwheelChainRidingHandler.tick());
-        ServerLifecycleEvents.SERVER_STOPPING.register(server -> ServerCogwheelChainRidingHandler.reset());
-        ServerLevelEvents.UNLOAD.register((server, level) -> {
-            LevelSimpleCache.clearAllForLevel(level);
-            LevelSafeStorage.clearAllForLevel(level);
+        NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class, event -> ServerCogwheelChainRidingHandler.tick());
+        NeoForge.EVENT_BUS.addListener(ServerStoppingEvent.class, event -> ServerCogwheelChainRidingHandler.reset());
+        NeoForge.EVENT_BUS.addListener(LevelEvent.Unload.class, event -> {
+            if (event.getLevel() instanceof final ServerLevel level) {
+                LevelSimpleCache.clearAllForLevel(level);
+                LevelSafeStorage.clearAllForLevel(level);
+            }
         });
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> BnbNetwork.sendToClient(handler.getPlayer(), ServerConfigPacket.ofLocalConfig()));
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, access, success) -> CogwheelChainCandidate.clearCache());
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> BnbCommands.register(dispatcher));
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, event -> {
+            if (event.getEntity() instanceof final ServerPlayer player)
+                BnbNetwork.sendToClient(player, ServerConfigPacket.ofLocalConfig());
+        });
+        // Fabric's END_DATA_PACK_RELOAD: NeoForge syncs data packs to everyone (no single player) after a reload
+        NeoForge.EVENT_BUS.addListener(OnDatapackSyncEvent.class, event -> {
+            if (event.getPlayer() == null)
+                CogwheelChainCandidate.clearCache();
+        });
+        NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> BnbCommands.register(event.getDispatcher()));
     }
 }

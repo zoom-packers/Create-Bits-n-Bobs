@@ -11,9 +11,7 @@ import com.zurrtum.create.AllItems;
 import com.zurrtum.create.catnip.theme.Color;
 import com.zurrtum.create.client.catnip.outliner.Outliner;
 import com.zurrtum.create.client.foundation.utility.RaycastHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
+import com.kipti.bnb.neoforge.client.LevelRenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -33,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
  * vanilla block highlight happen in one {@code LevelRenderEvents.BEFORE_BLOCK_OUTLINE} listener,
  * which fires every frame whether or not a block is targeted.
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainInteractionHandler {
 
     private static @Nullable BlockPos selectedController;
@@ -147,6 +144,12 @@ public final class CogwheelChainInteractionHandler {
 
         CogwheelChainRidingHelper.embark(attachment);
         return true;
+    }
+
+    /** NeoForge: whether a chain is selected, so the vanilla block outline is hidden (see BnbClientEvents). */
+    public static boolean hasValidSelection() {
+        final Minecraft mc = Minecraft.getInstance();
+        return mc.level != null && !invalidSelection(mc.level);
     }
 
     public static boolean beforeBlockOutline(final LevelRenderContext context) {

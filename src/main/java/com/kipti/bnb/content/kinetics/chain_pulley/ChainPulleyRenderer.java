@@ -14,8 +14,6 @@ import com.zurrtum.create.client.foundation.blockEntity.renderer.SmartBlockEntit
 import com.zurrtum.create.content.contraptions.AbstractContraptionEntity;
 import com.zurrtum.create.content.contraptions.pulley.PulleyBlock;
 import com.zurrtum.create.content.contraptions.pulley.PulleyContraption;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
@@ -31,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
  * during render-state extraction. Only the chain that hangs off the magnet is extra, and it is added to a widened
  * render state rather than by re-implementing the whole pulley.
  */
-@Environment(EnvType.CLIENT)
 public class ChainPulleyRenderer extends AbstractPulleyRenderer<ChainPulleyBlockEntity> {
 
     public ChainPulleyRenderer(final BlockEntityRendererProvider.Context context) {

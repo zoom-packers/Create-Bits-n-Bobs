@@ -1,6 +1,7 @@
 package com.kipti.bnb.network.packets.from_client;
 
 import com.kipti.bnb.foundation.behaviour.SuperBlockEntityBehaviour;
+import net.minecraft.util.Prediction;
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.behaviour.CogwheelChainBehaviour;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.edit.CogwheelChainPartialEdit;
@@ -315,7 +316,7 @@ public record PartialEditCogwheelChainPacket(
 
         player.getInventory().placeItemBackInInventory(
                 chainItem.getDefaultInstance().copyWithCount(chainsToRefund)
-        );
+        , Prediction.SERVER_ONLY);
     }
 
     private void replaceChain(final Level level,

@@ -1,8 +1,6 @@
 package com.kipti.bnb.content.decoration.cogwheel_material;
 
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
 import com.zurrtum.create.client.content.kinetics.base.KineticBlockEntityVisual;
 import com.zurrtum.create.client.content.kinetics.base.RotatingInstance;
@@ -28,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
  * with, and the face it was rotated to. It must be created lazily inside the constructor wrap: Mixin does not
  * execute field initialisers, so the field itself must start out {@code null}.
  */
-@Environment(EnvType.CLIENT)
 public interface CogwheelMaterialVisualSupport {
 
     class State {

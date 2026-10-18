@@ -29,7 +29,8 @@ import com.kipti.bnb.foundation.client.GenericKineticVisuals;
 import com.zurrtum.create.client.content.kinetics.base.KineticBlockEntityRenderer;
 import com.zurrtum.create.client.content.kinetics.base.ShaftRenderer;
 import com.zurrtum.create.client.content.kinetics.base.SingleAxisRotatingVisual;
-import com.zurrtum.create.client.content.kinetics.simpleRelays.encased.EncasedCogVisual;
+import com.zurrtum.create.client.content.kinetics.simpleRelays.encased.EncasedLargeCogVisual;
+import com.zurrtum.create.client.content.kinetics.simpleRelays.encased.EncasedSmallCogVisual;
 import com.zurrtum.create.client.content.kinetics.simpleRelays.encased.EncasedLargeCogRenderer;
 import com.zurrtum.create.client.content.kinetics.simpleRelays.encased.EncasedSmallCogRenderer;
 import com.zurrtum.create.AllBlocks;
@@ -100,7 +101,7 @@ public class BnbBlockEntities {
 
     public static final BlockEntityEntry<SimpleKineticBlockEntity> ENCASED_COGWHEEL = REGISTRATE
             .blockEntity("encased_cogwheel", SimpleKineticBlockEntity::new)
-            .visual(() -> EncasedCogVisual::small, false)
+            .visual(() -> EncasedSmallCogVisual::new, false)
             .validBlocks(
                     BnbExtraEncasedBlocks.INDUSTRIAL_IRON_ENCASED_COGWHEEL,
                     BnbExtraEncasedBlocks.WEATHERED_IRON_ENCASED_COGWHEEL
@@ -110,7 +111,7 @@ public class BnbBlockEntities {
 
     public static final BlockEntityEntry<SimpleKineticBlockEntity> ENCASED_LARGE_COGWHEEL = REGISTRATE
             .blockEntity("encased_large_cogwheel", SimpleKineticBlockEntity::new)
-            .visual(() -> EncasedCogVisual::large, false)
+            .visual(() -> EncasedLargeCogVisual::new, false)
             .validBlocks(
                     BnbExtraEncasedBlocks.INDUSTRIAL_IRON_ENCASED_LARGE_COGWHEEL,
                     BnbExtraEncasedBlocks.WEATHERED_IRON_ENCASED_LARGE_COGWHEEL

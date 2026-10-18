@@ -4,12 +4,10 @@ import com.kipti.bnb.registry.core.BnbFeatureFlag;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditionType;
-import net.minecraft.resources.RegistryOps;
+import net.neoforged.neoforge.common.conditions.ICondition;
 import org.jetbrains.annotations.NotNull;
 
-public record BnbFeatureEnabledCondition(String featureFlagKey) implements ResourceCondition {
+public record BnbFeatureEnabledCondition(String featureFlagKey) implements ICondition {
 
     public static final MapCodec<BnbFeatureEnabledCondition> CODEC = RecordCodecBuilder.mapCodec(
             c -> c.group(
@@ -17,16 +15,14 @@ public record BnbFeatureEnabledCondition(String featureFlagKey) implements Resou
             ).apply(c, BnbFeatureEnabledCondition::new)
     );
 
-    public static final ResourceConditionType<BnbFeatureEnabledCondition> TYPE =
-            ResourceConditionType.create(BnbResourceConditions.FEATURE_ENABLED, CODEC);
-
+    // NeoForge: ICondition replaces Fabric's ResourceCondition; the codec is registered in BnbResourceConditions
     @Override
-    public @NotNull ResourceConditionType<?> getType() {
-        return TYPE;
+    public @NotNull MapCodec<? extends ICondition> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean test(final RegistryOps.RegistryInfoLookup registryLookup) {
+    public boolean test(final IContext context) {
         return BnbFeatureFlag.isEnabled(this.featureFlagKey);
     }
 

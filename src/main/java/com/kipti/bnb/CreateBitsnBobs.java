@@ -5,7 +5,6 @@ import com.kipti.bnb.registry.content.BnbAdvancements;
 import com.kipti.bnb.foundation.behaviour.BnbBehaviourEvents;
 import com.kipti.bnb.foundation.config.conditions.BnbResourceConditions;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.types.BnbCogwheelChainTypes;
-import com.kipti.bnb.network.BnbPackets;
 import com.kipti.bnb.registrate.CreateRegistrate;
 import com.kipti.bnb.registry.azimuth.BnbBehaviourApplicators;
 import com.kipti.bnb.registry.compat.BnbCreateStresses;
@@ -20,7 +19,7 @@ import com.kipti.bnb.registry.core.BnbTags;
 import com.kipti.bnb.registry.datagen.BnbCreativeTabs;
 import com.kipti.bnb.registry.worldgen.BnbPaletteStoneTypes;
 import com.mojang.logging.LogUtils;
-import net.fabricmc.loader.api.FabricLoader;
+import com.zurrtum.create.neoforge.Platform;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 
@@ -56,7 +55,6 @@ public class CreateBitsnBobs {
         BnbBlockEntities.register();
         BnbContraptionTypes.register();
         BnbTags.register();
-        BnbPackets.register();
         BnbCreativeTabs.register();
         BnbAdvancements.register();
 
@@ -75,7 +73,7 @@ public class CreateBitsnBobs {
     }
 
     private static void warnAboutCogwheelAssetReplacement(final String modId, final String modName) {
-        if (FabricLoader.getInstance().isModLoaded(modId)) {
+        if (Platform.isModLoaded(modId)) {
             LOGGER.warn("Bits 'n' bobs is replacing cogwheel assets inside {} so they can be remapped to wooden materials!", modName);
         }
     }

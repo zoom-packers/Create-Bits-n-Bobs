@@ -20,16 +20,14 @@ import com.kipti.bnb.content.kinetics.gigantic_cogwheel.GiganticCogwheelRenderer
 import com.kipti.bnb.content.trinkets.light.headlamp.rendering.pipeline.block_entity.HeadlampVertexBufferCache;
 import com.zurrtum.create.client.catnip.render.SuperByteBufferCache;
 import com.zurrtum.create.client.ponder.foundation.PonderIndex;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.bus.api.IEventBus;
 
-@Environment(EnvType.CLIENT)
 public final class CreateBitsnBobsClient {
 
     private CreateBitsnBobsClient() {
     }
 
-    public static void initClient() {
+    public static void initClient(final IEventBus modBus) {
         RegistrateClient.flush(CreateBitsnBobs.REGISTRATE);
 
         BnbPartialModels.register();

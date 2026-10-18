@@ -17,7 +17,7 @@ public class TrussBlock extends RotatedPillarBlock implements IWrenchable {
     }
 
     @Override
-    protected @NonNull VoxelShape getShape(final BlockState p_60555_,
+    public @NonNull VoxelShape getShape(final BlockState p_60555_,
                                            final @NonNull BlockGetter p_60556_,
                                            final @NonNull BlockPos p_60557_,
                                            final @NonNull CollisionContext p_60558_) {

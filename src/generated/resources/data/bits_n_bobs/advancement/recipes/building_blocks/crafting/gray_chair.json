@@ -1,7 +1,7 @@
 {
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "bits_n_bobs:feature_enabled",
+      "type": "bits_n_bobs:feature_enabled",
       "feature": "chairs"
     }
   ],
@@ -9,7 +9,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bits_n_bobs:crafting/gray_chair"
+        "recipes": "bits_n_bobs:crafting/gray_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

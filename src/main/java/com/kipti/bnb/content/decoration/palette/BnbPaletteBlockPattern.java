@@ -18,8 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -53,7 +51,6 @@ public class BnbPaletteBlockPattern {
     private NonNullFunction<BlockBehaviour.Properties, ? extends Block> blockFactory;
     private BnbPaletteBlockPartial<? extends Block>[] partials;
 
-    @Environment(EnvType.CLIENT)
     private RenderType renderType;
 
     private static BnbPaletteBlockPattern create(final String name, final BnbPatternNameType nameType,

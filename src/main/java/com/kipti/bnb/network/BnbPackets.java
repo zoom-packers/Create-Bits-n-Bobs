@@ -10,8 +10,8 @@ import com.kipti.bnb.network.packets.to_client.CogwheelChainCarriageUpdateDistPa
 import com.kipti.bnb.network.packets.to_client.CogwheelChainRidingBroadcastPacket;
 import com.kipti.bnb.network.packets.to_client.PeekCogwheelChainControllerHighlightPacket;
 import com.kipti.bnb.network.packets.to_client.ServerConfigPacket;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -55,22 +55,23 @@ public enum BnbPackets implements BasePacketPayload.PacketTypeProvider {
         return serverbound;
     }
 
-    public static void register() {
+    // NeoForge: payload types are registered in RegisterPayloadHandlersEvent; the clientbound handlers are added on the
+    // client by neoforge/client/BnbClientNetwork. Server handlers run on the server thread by default.
+    public static void register(final RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
         for (final BnbPackets packet : values())
-            packet.registerOne();
+            packet.registerOne(registrar);
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends BasePacketPayload> void registerOne() {
+    private <T extends BasePacketPayload> void registerOne(final PayloadRegistrar registrar) {
         final BnbPacketType<T> type = (BnbPacketType<T>) this.packetType;
+        final StreamCodec<RegistryFriendlyByteBuf, T> codec = (StreamCodec<RegistryFriendlyByteBuf, T>) type.codec();
         if (serverbound) {
-            PayloadTypeRegistry.serverboundPlay().register(type.type(), (StreamCodec<RegistryFriendlyByteBuf, T>) type.codec());
-            ServerPlayNetworking.registerGlobalReceiver(type.type(), (payload, context) -> {
-                final ServerPlayer player = context.player();
-                context.server().execute(() -> ((ServerboundPacketPayload) payload).handle(player));
-            });
+            registrar.playToServer(type.type(), codec,
+                    (payload, context) -> ((ServerboundPacketPayload) payload).handle((ServerPlayer) context.player()));
         } else {
-            PayloadTypeRegistry.clientboundPlay().register(type.type(), (StreamCodec<RegistryFriendlyByteBuf, T>) type.codec());
+            registrar.playToClient(type.type(), codec);
         }
     }
 }

@@ -3,10 +3,7 @@ package com.kipti.bnb.foundation.client.audio;
 import com.kipti.bnb.registry.content.BnbBlockEntities;
 import com.zurrtum.create.client.AllBlockEntityBehaviours;
 import com.zurrtum.create.client.foundation.blockEntity.behaviour.audio.KineticAudioBehaviour;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
-@Environment(EnvType.CLIENT)
 public final class BnbAudioBehaviours {
 
     private BnbAudioBehaviours() {

@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.sprite.Material;
@@ -21,7 +19,6 @@ import java.util.List;
  * {@link BakedQuad} is a record of four {@link Vector3fc} positions plus a face direction, so a transformed quad is
  * simply a new record with moved positions and a re-derived face; normals are no longer stored on the quad.
  */
-@Environment(EnvType.CLIENT)
 public final class QuadRotator {
 
     private QuadRotator() {

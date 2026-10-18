@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -23,7 +21,6 @@ import java.util.List;
  * was: the quads culled to the requested face first, then the unculled quads whose own direction matches, and the
  * model's particle sprite as a last resort.
  */
-@Environment(EnvType.CLIENT)
 public final class ModelSprites {
 
     private ModelSprites() {

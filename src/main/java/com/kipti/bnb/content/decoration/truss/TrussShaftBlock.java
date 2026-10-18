@@ -19,7 +19,7 @@ public class TrussShaftBlock extends BnbEncasedShaftBlock {
     }
 
     @Override
-    protected VoxelShape getShape(final BlockState p_60555_,
+    public VoxelShape getShape(final BlockState p_60555_,
                                   final BlockGetter p_60556_,
                                   final BlockPos p_60557_,
                                   final CollisionContext p_60558_) {

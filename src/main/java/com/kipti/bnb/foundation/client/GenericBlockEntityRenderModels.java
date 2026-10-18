@@ -6,8 +6,6 @@ import com.kipti.bnb.registry.content.blocks.BnbKineticBlocks;
 import com.kipti.bnb.registry.content.blocks.encased.BnbEncasedBlockLists;
 import com.zurrtum.create.api.registry.SimpleRegistry;
 import com.zurrtum.create.client.flywheel.lib.model.baked.PartialModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.Block;
 
 /**
@@ -17,7 +15,6 @@ import net.minecraft.world.level.block.Block;
  * registration, so on Fabric they would pull {@link PartialModel} — a client class — onto a dedicated server. The
  * table is built from the same block entries at client init instead.
  */
-@Environment(EnvType.CLIENT)
 public class GenericBlockEntityRenderModels {
     public static final SimpleRegistry<Block, PartialModel> REGISTRY = SimpleRegistry.create();
 

@@ -10,8 +10,6 @@ import com.zurrtum.create.client.catnip.render.SuperByteBuffer;
 import com.zurrtum.create.client.catnip.render.SuperByteBufferCache;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import org.spongepowered.asm.mixin.Mixin;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
@@ -21,7 +19,6 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
  * context is set (see {@code CogwheelMaterialFunnel}). Only buffers for the cogwheel partials themselves are
  * swapped; metal parts ({@code SHAFT_HALF}, {@code COGWHEEL_SHAFT}, mixer pole/head) fall through to the original.
  */
-@Environment(EnvType.CLIENT)
 @Mixin(CachedBuffers.class)
 public abstract class CachedBuffersMixin {
 

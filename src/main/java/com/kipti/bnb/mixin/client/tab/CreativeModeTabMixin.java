@@ -4,8 +4,6 @@ import com.kipti.bnb.foundation.SuppressionFilters;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackLinkedSet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +20,6 @@ import java.util.Set;
  * and search trees clean, while the {@code getDisplayItems} filter applies the change to already-built tabs
  * immediately when a suppression config is toggled in-game.
  */
-@Environment(EnvType.CLIENT)
 @Mixin(CreativeModeTab.class)
 public abstract class CreativeModeTabMixin {
 

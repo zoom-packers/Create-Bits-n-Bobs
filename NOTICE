@@ -35,3 +35,10 @@ under `com.kipti.bnb.foundation.behaviour`, the Sable Companion stand-ins under
 `com.kipti.bnb.compat.sable` and the networking layer under
 `com.kipti.bnb.network` were written for this port and are released under the
 same MIT terms.
+
+NeoForge 26.3 port (Zoompack 5)
+
+Branch zp5/26.3 is a further modification by Zoom Packers: it ports this Fabric / Create
+Fly 26.2 build to NeoForge 26.3.0.89 and Minecraft 26.3, against Zoompack 5's NeoForge
+port of Create Fly. It is unofficial and not supported by the upstream authors or by
+chaevsfe. The changes are listed in PORTING.md and are under the same MIT licence.

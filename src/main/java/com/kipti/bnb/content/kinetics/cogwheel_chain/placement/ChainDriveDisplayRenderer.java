@@ -1,8 +1,6 @@
 package com.kipti.bnb.content.kinetics.cogwheel_chain.placement;
 
 import com.zurrtum.create.client.catnip.outliner.Outliner;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -17,7 +15,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>
  * Every method accepts an explicit colour so callers decide valid/invalid styling.
  */
-@Environment(EnvType.CLIENT)
 public final class ChainDriveDisplayRenderer {
 
     public static final int VALID_COLOUR = 0x95CD41;

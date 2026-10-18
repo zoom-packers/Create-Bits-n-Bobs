@@ -12,8 +12,6 @@ import com.kipti.bnb.content.kinetics.cogwheel_chain.types.CogwheelChainType;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.world.CogwheelChainWorld;
 import com.kipti.bnb.network.BnbNetwork;
 import com.kipti.bnb.network.packets.from_client.PartialEditCogwheelChainPacket;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -27,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainPartialEditInteractionHandler {
 
     private static @Nullable CogwheelChainPartialEdit currentEditContext = null;

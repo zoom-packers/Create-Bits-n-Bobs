@@ -2,13 +2,10 @@ package com.kipti.bnb.foundation.client.outline;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.zurrtum.create.client.catnip.outliner.LineOutline;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
 
-@Environment(EnvType.CLIENT)
 public class ExpandingLineOutline extends LineOutline {
 
     private final Vector3d lerpedStart = new Vector3d();

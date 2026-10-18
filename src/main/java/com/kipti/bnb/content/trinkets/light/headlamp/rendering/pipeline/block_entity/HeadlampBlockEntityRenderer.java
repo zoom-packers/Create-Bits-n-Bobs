@@ -7,8 +7,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.zurrtum.create.client.catnip.render.SuperByteBuffer;
 import com.zurrtum.create.client.catnip.render.SuperByteBufferRenderState;
 import com.zurrtum.create.client.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
@@ -27,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
  * in that state. Upstream also had a Flywheel visual for these; this port renders them through the block entity
  * renderer on both backends instead (see the phase report).
  */
-@Environment(EnvType.CLIENT)
 public class HeadlampBlockEntityRenderer
         extends SmartBlockEntityRenderer<HeadlampBlockEntity, HeadlampBlockEntityRenderer.HeadlampRenderState> {
 

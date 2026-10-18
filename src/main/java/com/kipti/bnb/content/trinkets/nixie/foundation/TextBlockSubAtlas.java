@@ -2,8 +2,6 @@ package com.kipti.bnb.content.trinkets.nixie.foundation;
 
 import com.kipti.bnb.CreateBitsnBobs;
 import com.zurrtum.create.client.catnip.render.StitchedSprite;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +15,6 @@ import java.util.stream.Collectors;
  * Util class to handle a sub-atlas of text characters for Nixie displays.
  * This class generates UV coordinates for a set of characters, the texture must be already in the block atlas.
  */
-@Environment(EnvType.CLIENT)
 public class TextBlockSubAtlas {
 
     /**

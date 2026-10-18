@@ -4,14 +4,11 @@ import com.kipti.bnb.content.kinetics.flywheel_bearing.FlywheelBearingBlockEntit
 import com.zurrtum.create.client.content.contraptions.IDisplayAssemblyExceptions;
 import com.zurrtum.create.client.foundation.blockEntity.behaviour.tooltip.GeneratingKineticTooltipBehaviour;
 import com.zurrtum.create.content.contraptions.AssemblyException;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public class BnbFlywheelBearingTooltipBehaviour extends GeneratingKineticTooltipBehaviour<FlywheelBearingBlockEntity>
         implements IDisplayAssemblyExceptions {
 

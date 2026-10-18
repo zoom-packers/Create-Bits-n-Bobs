@@ -13,8 +13,6 @@ import com.zurrtum.create.client.content.kinetics.simpleRelays.BracketedKineticB
 import com.zurrtum.create.content.kinetics.base.IRotate;
 import com.zurrtum.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
 import com.zurrtum.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
@@ -41,7 +39,6 @@ import java.util.List;
  * {@link BracketedKineticBlockEntityRenderer#getShaftAngleOffset(Axis, BlockPos)}, which is the offset a large cog's
  * shaft uses instead of the cog's own position offset.
  */
-@Environment(EnvType.CLIENT)
 public class BnbEncasedFlangedCogRenderer
         extends KineticBlockEntityRenderer<SimpleKineticBlockEntity, BnbEncasedFlangedCogRenderer.FlangedCogRenderState> {
 

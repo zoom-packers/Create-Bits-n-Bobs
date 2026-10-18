@@ -4,11 +4,8 @@ import com.kipti.bnb.foundation.client.outline.ExpandingLineOutline;
 import com.zurrtum.create.client.ponder.api.PonderPalette;
 import com.zurrtum.create.client.ponder.foundation.PonderScene;
 import com.zurrtum.create.client.ponder.foundation.instruction.TickingInstruction;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
 public class ExpandingOutlineInstruction extends TickingInstruction {
 
     private final PonderPalette color;

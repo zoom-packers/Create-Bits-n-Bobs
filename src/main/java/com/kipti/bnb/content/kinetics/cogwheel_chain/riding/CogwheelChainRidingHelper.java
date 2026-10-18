@@ -7,8 +7,6 @@ import com.kipti.bnb.network.packets.from_client.CogwheelChainRidingPacket;
 import com.zurrtum.create.AllItemTags;
 import com.zurrtum.create.client.catnip.animation.AnimationTickHolder;
 import com.zurrtum.create.client.content.kinetics.chainConveyor.ChainConveyorRidingHandler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -23,7 +21,6 @@ import net.minecraft.world.phys.Vec3;
  * <p>All state is static and only meaningful on the logical client.
  * Call {@link #clientTick(LocalPlayer)} from client tick events.</p>
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainRidingHelper {
 
     private static CogwheelChainAttachment currentAttachment;

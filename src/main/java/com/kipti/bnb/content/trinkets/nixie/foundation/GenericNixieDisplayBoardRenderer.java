@@ -8,8 +8,6 @@ import com.zurrtum.create.catnip.data.Couple;
 import com.zurrtum.create.client.flywheel.lib.transform.TransformStack;
 import com.zurrtum.create.client.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.zurrtum.create.client.foundation.utility.DyeHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GlyphSource;
@@ -47,7 +45,6 @@ import java.util.List;
  * The back face used to need a mixin on {@code BakedGlyph} because font render types ignore normals. It is drawn
  * here by submitting the same glyph a second time under a pose that is turned around, which needs no mixin.
  */
-@Environment(EnvType.CLIENT)
 public class GenericNixieDisplayBoardRenderer
         extends SmartBlockEntityRenderer<GenericNixieDisplayBlockEntity, GenericNixieDisplayBoardRenderer.NixieDisplayRenderState> {
 

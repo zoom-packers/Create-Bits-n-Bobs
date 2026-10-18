@@ -2,67 +2,78 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import javax.imageio.ImageIO
 
+// NeoForge 26.3 build for Zoompack 5, against ZP5's NeoForge port of Create Fly (see PORTING.md).
 plugins {
-    id("net.fabricmc.fabric-loom") version "1.16-SNAPSHOT"
-    `maven-publish`
+    `java-library`
+    id("net.neoforged.moddev") version "2.0.148"
 }
 
 group = property("maven_group") as String
-version = "${property("mod_version")}+fly-mc${property("mc_line")}"
+version = "${property("mod_version")}+neoforge-${property("minecraft_version")}-${property("port_build")}"
 
 base {
     archivesName.set(property("archives_base_name") as String)
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.fabricmc.net/")
-    maven("https://api.modrinth.com/maven") {
-        content { includeGroup("maven.modrinth") }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+val createJar = files(property("create_jar") as String)
+val strutsJar = files(property("struts_jar") as String)
+
+sourceSets {
+    main {
+        resources.srcDir("src/generated/resources")
+        // Fabric entrypoints and metadata, replaced by com/kipti/bnb/neoforge/** (see PORTING.md)
+        java.exclude("com/kipti/bnb/fabric/**")
+        resources.exclude("fabric.mod.json")
     }
 }
 
-loom {
+neoForge {
+    version = property("neo_version") as String
+
+    // Create's access transformer and interface injections, so code that uses them compiles
+    accessTransformers.from(file("libs/create-accesstransformer.cfg"))
+    interfaceInjectionData.from(file("libs/create-interfaces.json"))
+
     mods {
         create("bits_n_bobs") {
             sourceSet(sourceSets.main.get())
         }
     }
-}
 
-sourceSets {
-    main {
-        resources.srcDir("src/generated/resources")
+    runs {
+        create("client") {
+            client()
+        }
+        create("server") {
+            server()
+            programArgument("--nogui")
+        }
+        create("gameTestServer") {
+            type = "gameTestServer"
+            systemProperty("neoforge.enabledGameTestNamespaces", "bits_n_bobs")
+        }
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+            if (project.hasProperty("mixinDebug")) {
+                systemProperty("mixin.debug.verbose", "true")
+                systemProperty("mixin.debug.export", "true")
+            }
+        }
     }
 }
-
-repositories {
-    flatDir {
-        dirs(
-            "libs",
-            "../../create-struts/StrutYourStuff-Fly/build/libs",
-            "../../create-rei/CreateReiViewer-Fly/build/libs",
-        )
-    }
-}
-val struts = ":StrutYourStuff:${property("struts_version")}"
-val recipeViewer = ":CreateReiViewer:${property("createreiviewer_version")}"
 
 dependencies {
-    minecraft("com.mojang:minecraft:${property("minecraft_version")}")
-    implementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
-    implementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
-    implementation("maven.modrinth:create-fly:${property("create_fabric_version")}")
-    compileOnly(struts)
-    include(struts)
-    include(recipeViewer)
-
+    compileOnly(createJar)
+    compileOnly(strutsJar)
+    // Create and Strut Your Stuff are loaded as mods in the dev runs
+    runtimeOnly(createJar)
+    runtimeOnly(strutsJar)
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
     withSourcesJar()
 }
 
@@ -148,22 +159,28 @@ val generateConnectedTextureSprites = tasks.register("generateConnectedTextureSp
     }
 }
 
+// Expands ${...} placeholders in src/main/templates (neoforge.mods.toml) from gradle.properties
+val generateModMetadata = tasks.register<ProcessResources>("generateModMetadata") {
+    val props = mapOf(
+        "version" to project.version.toString(),
+        "minecraft_version_range" to project.property("minecraft_version_range") as String,
+        "neo_version_range" to project.property("neo_version_range") as String,
+        "create_version_range" to project.property("create_version_range") as String,
+        "struts_version_range" to project.property("struts_version_range") as String,
+    )
+    inputs.properties(props)
+    expand(props)
+    from("src/main/templates")
+    into(layout.buildDirectory.dir("generated/sources/modMetadata"))
+}
+sourceSets.main.get().resources.srcDir(generateModMetadata)
+neoForge.ideSyncTask(generateModMetadata)
+
 tasks.processResources {
     dependsOn(generateConnectedTextureSprites)
     from(generatedConnectedTextureResources)
     exclude(connectedTextureSheets.keys)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    val modMetadata = mapOf(
-        "version" to project.version.toString(),
-        "mc_line" to project.property("mc_line") as String,
-        "minecraft_dependency_version" to project.property("minecraft_dependency_version") as String,
-        "fabric_loader_version" to project.property("fabric_loader_version") as String,
-        "create_fabric_version_range" to project.property("create_fabric_version_range") as String,
-    )
-    inputs.properties(modMetadata)
-    filesMatching("fabric.mod.json") {
-        expand(modMetadata)
-    }
 }
 
 tasks.jar {
@@ -186,7 +203,6 @@ val allowedResourcePrefixes = listOf(
     "NOTICE",
     "bits_n_bobs.mixins.json",
     "bits_n_bobs.client.mixins.json",
-    "fabric.mod.json",
     "data/c/tags/",
     "data/create/tags/",
     "data/create/advancement/",
@@ -202,9 +218,7 @@ val allowedResourcePrefixes = listOf(
 
 afterEvaluate {
     val checkForeignNamespaces = tasks.register("checkForeignNamespaces") {
-        val jarNames = listOf("remapJar", "remapSourcesJar", "jar", "sourcesJar")
-                .filter { tasks.names.contains(it) }
-                .let { names -> if (names.contains("remapJar")) names.filter { it.startsWith("remap") } else names }
+        val jarNames = listOf("jar", "sourcesJar").filter { tasks.names.contains(it) }
         require(jarNames.isNotEmpty()) { "checkForeignNamespaces found no jar task to inspect" }
         val jarTasks = jarNames.map { tasks.named<Jar>(it).get() }
         dependsOn(jarTasks)

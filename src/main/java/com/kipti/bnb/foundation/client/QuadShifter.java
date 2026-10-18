@@ -2,8 +2,6 @@ package com.kipti.bnb.foundation.client;
 
 import com.zurrtum.create.client.catnip.render.SpriteShiftEntry;
 import com.zurrtum.create.client.foundation.model.BakedModelHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.builders.UVPair;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -28,7 +26,6 @@ import java.util.function.Function;
  * original sprite. Create Fly's connected-texture pass moves a quad's UVs into a per-tile sprite but leaves the sprite
  * the quad reports unchanged, so the reported sprite says nothing about which tile the quad draws.
  */
-@Environment(EnvType.CLIENT)
 public final class QuadShifter {
 
     private static final float UV_EPSILON = 1.0E-4f;
@@ -70,7 +67,8 @@ public final class QuadShifter {
 
         BakedQuad.MaterialInfo info = quad.materialInfo();
         BakedQuad.MaterialInfo shifted = new BakedQuad.MaterialInfo(
-                target, info.layer(), info.itemRenderType(), info.tintIndex(), info.shade(), info.lightEmission());
+                target, info.layer(), info.itemRenderType(), info.itemGlintRenderType(), info.itemGlintSpecialRenderType(),
+                info.tintIndex(), info.shadeDirectionOverride(), info.lightEmission(), info.ambientOcclusion()); // 26.3
 
         return BakedModelHelper.replaceBakedQuadUV(
                 quad,

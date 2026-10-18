@@ -1,7 +1,6 @@
 package com.kipti.bnb.content.kinetics.cogwheel_carriage.block;
 
 import com.kipti.bnb.registry.content.BnbBlockEntities;
-import com.mojang.serialization.MapCodec;
 import com.zurrtum.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -31,16 +30,11 @@ import org.jspecify.annotations.Nullable;
  */
 public class CogwheelChainCarriageBlock extends HorizontalDirectionalBlock implements IBE<CogwheelChainCarriageBlockEntity> {
 
-    public static final MapCodec<CogwheelChainCarriageBlock> CODEC = simpleCodec(CogwheelChainCarriageBlock::new);
 
     public CogwheelChainCarriageBlock(final Properties properties) {
         super(properties);
     }
 
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> p_49915_) {

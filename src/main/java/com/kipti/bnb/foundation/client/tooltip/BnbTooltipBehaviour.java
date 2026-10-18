@@ -6,14 +6,11 @@ import com.zurrtum.create.client.content.contraptions.IDisplayAssemblyExceptions
 import com.zurrtum.create.client.foundation.blockEntity.behaviour.tooltip.TooltipBehaviour;
 import com.zurrtum.create.content.contraptions.AssemblyException;
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public class BnbTooltipBehaviour extends TooltipBehaviour<SmartBlockEntity>
         implements IHaveGoggleInformation, IHaveHoveringInformation, IDisplayAssemblyExceptions {
 

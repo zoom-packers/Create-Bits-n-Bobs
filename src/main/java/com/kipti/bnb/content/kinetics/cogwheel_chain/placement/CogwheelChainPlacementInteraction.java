@@ -10,8 +10,6 @@ import com.kipti.bnb.network.packets.from_client.PlaceCogwheelChainPacket;
 import com.kipti.bnb.network.packets.from_client.WrenchCogwheelChainPacket;
 import com.zurrtum.create.AllItems;
 import com.zurrtum.create.content.kinetics.chainConveyor.ChainConveyorBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -36,7 +34,6 @@ import org.jetbrains.annotations.Nullable;
  * targeted and {@code UseItemCallback} when one is not; both are registered from the client entrypoint and
  * both funnel into {@link #onRightClick(InteractionHand)}, which answers whether the click was consumed.
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainPlacementInteraction {
 
     private static @Nullable PlacingCogwheelChain currentBuildingChain = null;

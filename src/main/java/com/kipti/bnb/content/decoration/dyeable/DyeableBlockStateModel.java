@@ -3,8 +3,6 @@ package com.kipti.bnb.content.decoration.dyeable;
 import com.kipti.bnb.foundation.client.QuadShifter;
 import com.zurrtum.create.client.catnip.render.SpriteShiftEntry;
 import com.zurrtum.create.client.infrastructure.model.WrapperBlockStateModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -28,7 +26,6 @@ import java.util.function.BiFunction;
  * to them directly. Wrapping composes, so a pipe keeps Create's own attachment model and a tank keeps its connected
  * textures, with the dye shift applied on top of whatever they produced.
  */
-@Environment(EnvType.CLIENT)
 public class DyeableBlockStateModel extends WrapperBlockStateModel {
 
     /** Which dye colour a position carries, and which sprite shifts that colour selects. */

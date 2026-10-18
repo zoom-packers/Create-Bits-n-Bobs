@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.scenes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.zurrtum.create.client.foundation.ponder.CreateSceneBuilder;
 import com.kipti.bnb.registrate.entry.BlockEntry;
 import com.zurrtum.create.catnip.math.Pointing;
@@ -16,7 +14,6 @@ import net.minecraft.world.level.block.Blocks;
  * Ponder scenes demonstrating Girder Strut placement mechanics.
  * Registered for all 3 strut variants (industrial, weathered, cable) with variant-specific schematics.
  */
-@Environment(EnvType.CLIENT)
 public class GirderStrutScenes {
 
     public static void girderStrut(final SceneBuilder builder,

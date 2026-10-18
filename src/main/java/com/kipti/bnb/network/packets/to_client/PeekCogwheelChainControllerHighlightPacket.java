@@ -9,8 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 public record PeekCogwheelChainControllerHighlightPacket(BlockPos controllerPos) implements ClientboundPacketPayload {
 
@@ -22,7 +20,6 @@ public record PeekCogwheelChainControllerHighlightPacket(BlockPos controllerPos)
             );
 
     @Override
-    @Environment(EnvType.CLIENT)
     public void handle(final LocalPlayer player) {
         if (!player.level().isLoaded(controllerPos)) {
             return;

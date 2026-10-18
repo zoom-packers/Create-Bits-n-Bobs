@@ -9,8 +9,6 @@ import com.zurrtum.create.client.catnip.render.StitchedSprite;
 import com.zurrtum.create.client.flywheel.lib.model.baked.PartialModel;
 import com.zurrtum.create.client.foundation.model.BakedModelHelper;
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
@@ -35,7 +33,6 @@ import java.util.function.UnaryOperator;
  * {@link BakedModelHelper#generateModel(BlockStateModel, UnaryOperator)}, which does exactly the same swap over
  * 26.2's {@code BlockStateModel}, so the quad-cloning half is gone.
  */
-@Environment(EnvType.CLIENT)
 public class CogwheelMaterialRenderer {
 
     public static final StitchedSprite SPRUCE_PLANKS_TEMPLATE = new StitchedSprite(Identifier.withDefaultNamespace("block/spruce_planks"));

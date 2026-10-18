@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
@@ -18,7 +16,6 @@ import java.util.List;
  * Create Fly builds a {@code SuperByteBuffer} from a {@code BlockStateModel}, so code that used to write vertices
  * into a {@code BufferBuilder} by hand hands its quads over through this instead.
  */
-@Environment(EnvType.CLIENT)
 public record QuadListModel(List<BakedQuad> quads, Material.Baked particle, int materialFlags)
         implements BlockStateModel, BlockStateModelPart {
 

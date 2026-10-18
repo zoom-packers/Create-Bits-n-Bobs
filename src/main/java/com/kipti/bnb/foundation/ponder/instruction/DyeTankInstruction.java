@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.instruction;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.decoration.dyeable.tanks.DyeableTankBehaviour;
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
@@ -16,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Changes the dye color on a fluid tank block in the ponder world, updating the rendered model
  */
-@Environment(EnvType.CLIENT)
 public class DyeTankInstruction extends PonderInstruction {
 
     private final BlockPos tankPos;

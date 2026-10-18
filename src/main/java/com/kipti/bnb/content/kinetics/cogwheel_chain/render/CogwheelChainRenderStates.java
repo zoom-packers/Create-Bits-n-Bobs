@@ -11,8 +11,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.zurrtum.create.client.catnip.animation.AnimationTickHolder;
 import com.zurrtum.create.client.foundation.render.CreateRenderTypes;
 import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.core.BlockPos;
@@ -35,7 +33,6 @@ import java.util.Set;
  * the lighting are the only per-frame work. Nothing here is reachable from a dedicated server: the class is
  * loaded from the client entrypoint by {@link CogwheelChainLevelRenderer}.
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainRenderStates {
 
     /**

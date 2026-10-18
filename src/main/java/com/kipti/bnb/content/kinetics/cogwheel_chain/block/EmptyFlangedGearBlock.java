@@ -43,7 +43,7 @@ public class EmptyFlangedGearBlock extends RotatedPillarKineticBlock implements 
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(final BlockState state, final @NotNull BlockGetter level, final @NotNull BlockPos pos, final @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(final BlockState state, final @NotNull BlockGetter level, final @NotNull BlockPos pos, final @NotNull CollisionContext context) {
         return (isLarge ? BnbShapes.LARGE_FLANGED_GEAR : BnbShapes.SMALL_FLANGED_GEAR).get(state.getValue(AXIS));
     }
 

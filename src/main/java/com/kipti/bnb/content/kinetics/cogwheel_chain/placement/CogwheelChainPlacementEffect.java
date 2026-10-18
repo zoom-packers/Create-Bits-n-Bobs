@@ -7,8 +7,6 @@ import com.kipti.bnb.content.kinetics.cogwheel_chain.graph.PlacingCogwheelNode;
 import com.kipti.bnb.foundation.config.BnbServerSettings;
 import com.zurrtum.create.client.content.equipment.blueprint.BlueprintOverlayRenderer;
 import com.zurrtum.create.content.kinetics.chainConveyor.ChainConveyorBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -36,7 +34,6 @@ import static com.kipti.bnb.content.kinetics.cogwheel_chain.placement.CogwheelCh
  * Renders existing chain nodes (shapes + connections) and provides visual feedback for the next target: outliner for
  * valid connections, particles for invalid or no-target cases.
  */
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainPlacementEffect {
 
     private CogwheelChainPlacementEffect() {

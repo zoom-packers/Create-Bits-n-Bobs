@@ -11,7 +11,7 @@
 			"name": "bulbglass",
 			"from": [5, 5, 5],
 			"to": [11, 13.5, 11],
-			"shade": false,
+			"shade_direction_override": "up",
 			"light_emission": 15,
 			"faces": {
 				"north": {"uv": [0, 0, 3, 4], "texture": "#2"},

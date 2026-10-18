@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.scenes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.content.decoration.dyeable.pipes.DyeablePipeBehaviour;
 import com.kipti.bnb.foundation.ponder.instruction.DyePipeInstruction;
 import com.zurrtum.create.client.foundation.ponder.CreateSceneBuilder;
@@ -15,7 +13,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
-@Environment(EnvType.CLIENT)
 public class DyedPipeScenes {
 
     public static void dyedPipes(final SceneBuilder builder, final SceneBuildingUtil util) {

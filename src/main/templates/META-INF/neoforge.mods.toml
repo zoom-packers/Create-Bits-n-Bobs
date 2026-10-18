@@ -1,0 +1,57 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/chaevsfe/Create-Bits-n-Bobs/issues"
+
+[[mods]]
+modId = "bits_n_bobs"
+version = "${version}"
+displayName = "Create Fly: Bits 'n' Bobs (NeoForge)"
+iconFile = "assets/bits_n_bobs/icon.png"
+authors = "Cake, Kipti, NormalGuy, Astral, Spydnel (Bits 'n' Bobs); chaevsfe (Create Fly port); Zoom Packers (NeoForge 26.3 port)"
+displayURL = "https://github.com/chaevsfe/Create-Bits-n-Bobs"
+description = '''
+Create: Bits 'n' Bobs for Create Fly on NeoForge 26.3. Decoration, kinetics and trinkets for Create.
+Unofficial: do not report issues from this build to the Bits 'n' Bobs or Create Fly developers.
+'''
+
+[[mixins]]
+config = "bits_n_bobs.mixins.json"
+
+[[mixins]]
+config = "bits_n_bobs.client.mixins.json"
+
+[[dependencies.bits_n_bobs]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neo_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bits_n_bobs]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bits_n_bobs]]
+modId = "create"
+type = "required"
+versionRange = "${create_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.bits_n_bobs]]
+modId = "struts"
+type = "required"
+versionRange = "${struts_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.bits_n_bobs]]
+modId = "sable"
+type = "incompatible"
+reason = "The Create Fly port of Bits 'n' Bobs does not support Sable"
+versionRange = "[0,)"
+side = "BOTH"

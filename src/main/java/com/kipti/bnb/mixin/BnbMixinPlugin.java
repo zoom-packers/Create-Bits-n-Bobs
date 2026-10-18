@@ -1,6 +1,6 @@
 package com.kipti.bnb.mixin;
 
-import net.fabricmc.loader.api.FabricLoader;
+import com.zurrtum.create.neoforge.Platform;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -36,7 +36,7 @@ public class BnbMixinPlugin implements IMixinConfigPlugin {
             final String compatPackageSubpath = mixinClassName.substring(COMPAT_PACKAGE.length() + 1);
             for (final String modId : COMPAT_MOD_IDS) {
                 if (compatPackageSubpath.contains(modId)) {
-                    return FabricLoader.getInstance().isModLoaded(modId);
+                    return Platform.isModLoaded(modId);
                 }
             }
         }

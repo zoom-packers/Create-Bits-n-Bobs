@@ -9,7 +9,6 @@ import com.kipti.bnb.registry.content.blocks.BnbTrinketBlocks;
 import com.kipti.bnb.registry.core.BnbFeatureFlag;
 import com.kipti.bnb.registry.worldgen.BnbPaletteStoneTypes;
 import com.zurrtum.create.content.decoration.encasing.EncasedBlock;
-import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -29,13 +28,13 @@ public class BnbCreativeTabs {
             ResourceKey.create(Registries.CREATIVE_MODE_TAB, CreateBitsnBobs.asResource("bnb_palettes"));
 
     public static void register() {
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, BASE_CREATIVE_TAB, FabricCreativeModeTab.builder()
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, BASE_CREATIVE_TAB, CreativeModeTab.builder()
                 .title(Component.translatable("tab." + CreateBitsnBobs.MOD_ID + ".base"))
                 .icon(BnbKineticBlocks.SMALL_FLANGED_COGWHEEL::asStack)
                 .displayItems((parameters, output) -> buildCreativeTabContents(output, BASE_CREATIVE_TAB))
                 .build());
 
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, PALETTES_CREATIVE_TAB, FabricCreativeModeTab.builder()
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, PALETTES_CREATIVE_TAB, CreativeModeTab.builder()
                 .title(Component.translatable("tab." + CreateBitsnBobs.MOD_ID + ".deco"))
                 .icon(() -> BnbPaletteStoneTypes.ASURINE.getVariants().registeredBlocks.getFirst().asStack())
                 .displayItems((parameters, output) -> buildCreativeTabContents(output, PALETTES_CREATIVE_TAB))

@@ -1,7 +1,5 @@
 package com.kipti.bnb.foundation.ponder.scenes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.content.decoration.dyeable.pipes.DyeablePipeBehaviour;
 import com.kipti.bnb.foundation.ponder.PonderBlockEntityIO;
 import com.kipti.bnb.content.decoration.dyeable.tanks.DyeableTankBehaviour;
@@ -27,7 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
 public class DyedTankScenes {
 
     public static void dyedTank(final SceneBuilder builder, final SceneBuildingUtil util) {

@@ -4,19 +4,16 @@ import com.kipti.bnb.foundation.client.BnbClientHooks;
 import com.kipti.bnb.network.packets.from_client.DragInteractionUpdatePacket;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Window;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.lwjgl.glfw.GLFW;
+import org.lwjgl.sdl.SDLMouse;
 
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 
-@Environment(EnvType.CLIENT)
 public class DragInteractionScreen extends Screen {
 
     private final BlockPos targetPos;
@@ -74,10 +71,9 @@ public class DragInteractionScreen extends Screen {
 
         final Window window = this.minecraft.getWindow();
         this.lastMouseY = window.getGuiScaledHeight() / 2.0;
-        InputConstants.grabOrReleaseMouse(
-                window, GLFW.GLFW_CURSOR_HIDDEN,
-                window.getScreenWidth() / 2.0, window.getScreenHeight() / 2.0
-        );
+        // 26.3: SDL replaces GLFW; hide the cursor and keep it centred, as GLFW_CURSOR_HIDDEN did
+        SDLMouse.SDL_HideCursor();
+        SDLMouse.SDL_WarpMouseInWindow(window.handle(), window.getScreenWidth() / 2.0f, window.getScreenHeight() / 2.0f);
     }
 
     @Override

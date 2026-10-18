@@ -3,8 +3,6 @@ package com.kipti.bnb.content.trinkets.light.headlamp.rendering.pipeline.block_e
 import com.kipti.bnb.CreateBitsnBobs;
 import com.kipti.bnb.content.trinkets.light.headlamp.HeadlampBlockEntity;
 import com.zurrtum.create.client.catnip.render.StitchedSprite;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,7 +19,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
 public class HeadlampRenderCache {
 
     private static final int MAX_QUAD_CACHE_ENTRIES = 512;

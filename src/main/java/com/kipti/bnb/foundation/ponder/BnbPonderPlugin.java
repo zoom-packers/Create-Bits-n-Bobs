@@ -5,12 +5,9 @@ import com.zurrtum.create.client.ponder.api.registration.PonderPlugin;
 import com.zurrtum.create.client.ponder.api.registration.PonderSceneRegistrationHelper;
 import com.zurrtum.create.client.ponder.api.registration.PonderTagRegistrationHelper;
 import com.zurrtum.create.client.ponder.api.registration.SharedTextRegistrationHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
 public class BnbPonderPlugin implements PonderPlugin {
 
     @Override

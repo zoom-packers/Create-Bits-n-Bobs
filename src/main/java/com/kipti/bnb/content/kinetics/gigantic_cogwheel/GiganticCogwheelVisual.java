@@ -8,8 +8,6 @@ import com.zurrtum.create.client.flywheel.api.model.Model;
 import com.zurrtum.create.client.flywheel.api.visualization.VisualizationContext;
 import com.zurrtum.create.client.flywheel.lib.model.baked.BakedModelBuilder;
 import com.zurrtum.create.client.flywheel.lib.util.RendererReloadCache;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -19,7 +17,6 @@ import java.util.function.Consumer;
  * Handles Flywheel-based visualization for the gigantic cogwheel, managing
  * rotating instances and model caching based on the cogwheel's material.
  */
-@Environment(EnvType.CLIENT)
 public class GiganticCogwheelVisual extends KineticBlockEntityVisual<GiganticCogwheelBlockEntity> {
 
     private static final RendererReloadCache<ModelKey, Model> MODEL_CACHE = new RendererReloadCache<>(

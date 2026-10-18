@@ -4,7 +4,7 @@ import com.kipti.bnb.registry.core.BnbConfigs;
 import com.kipti.bnb.registry.core.BnbTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.loader.api.FabricLoader;
+import com.zurrtum.create.neoforge.Platform;
 import org.slf4j.Logger;
 
 import java.util.function.BooleanSupplier;
@@ -16,7 +16,7 @@ public enum BnbSuppression {
             () -> BnbConfigs.common().SUPPRESS_EXTERNAL_WOODEN_COGWHEELS.get(),
             BnbTags.BnbItemTags.SUPPRESSIBLE_COGWHEELS,
             "tooltip.bits_n_bobs.suppressed_cogwheel",
-            () -> FabricLoader.getInstance().isModLoaded("createcasing"),
+            () -> Platform.isModLoaded("createcasing"),
             "Suppression of external wooden cogwheels is enabled. This may cause some items from Create: Encased to be hidden from creative tabs and recipe viewers."
     );
 

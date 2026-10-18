@@ -1,7 +1,7 @@
 {
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "bits_n_bobs:feature_item_enabled",
+      "type": "bits_n_bobs:feature_item_enabled",
       "item": "bits_n_bobs:cable_strut"
     }
   ],

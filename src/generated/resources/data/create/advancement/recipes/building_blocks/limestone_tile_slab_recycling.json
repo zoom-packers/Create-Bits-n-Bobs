@@ -1,7 +1,7 @@
 {
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "bits_n_bobs:feature_enabled",
+      "type": "bits_n_bobs:feature_enabled",
       "feature": "tiles"
     }
   ],
@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create:limestone_tile_slab_recycling"
+        "recipes": "create:limestone_tile_slab_recycling"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

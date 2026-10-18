@@ -6,11 +6,8 @@ import com.zurrtum.create.client.infrastructure.ponder.scenes.PulleyScenes;
 import com.kipti.bnb.registrate.entry.ItemProviderEntry;
 import com.kipti.bnb.registrate.entry.RegistryEntry;
 import com.zurrtum.create.client.ponder.api.registration.PonderSceneRegistrationHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
 
-@Environment(EnvType.CLIENT)
 public class BnbCreatePonderScenes {
 
     public static void register(final PonderSceneRegistrationHelper<Identifier> helper) {

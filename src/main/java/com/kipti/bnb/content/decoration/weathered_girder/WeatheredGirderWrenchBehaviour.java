@@ -21,8 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -34,7 +32,6 @@ import java.util.List;
  */
 public class WeatheredGirderWrenchBehaviour {
 
-    @Environment(EnvType.CLIENT)
     public static void tick() {
         final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null || !(mc.hitResult instanceof final BlockHitResult result))

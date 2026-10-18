@@ -1,8 +1,6 @@
 package com.kipti.bnb.content.kinetics.cogwheel_chain.riding;
 
 import com.kipti.bnb.mixin.client.chain.PlayerSkyhookRendererAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +10,6 @@ import java.util.UUID;
 /**
  * Keeps BnB hanging players merged into Create's shared skyhook renderer state.
  */
-@Environment(EnvType.CLIENT)
 public final class PlayerSkyhookRendererBridge {
 
     private static final Set<UUID> bnbHangingPlayers = new HashSet<>();

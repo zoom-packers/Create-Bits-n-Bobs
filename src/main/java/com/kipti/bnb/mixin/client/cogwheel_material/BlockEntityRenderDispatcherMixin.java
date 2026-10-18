@@ -5,6 +5,8 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.culling.Frustum;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,21 +19,23 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(BlockEntityRenderDispatcher.class)
 public abstract class BlockEntityRenderDispatcherMixin {
 
-    @WrapMethod(method = "tryExtractRenderState")
+    // NeoForge: the 4-argument vanilla overload only delegates to this one
+    @WrapMethod(method = "tryExtractRenderState(Lnet/minecraft/world/level/block/entity/BlockEntity;FLnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;ZLnet/minecraft/client/renderer/culling/Frustum;)Lnet/minecraft/client/renderer/blockentity/state/BlockEntityRenderState;")
     private <E extends BlockEntity, S extends BlockEntityRenderState> S bnb$pushMaterialContext(
             E blockEntity,
             float tickProgress,
             ModelFeatureRenderer.CrumblingOverlay crumblingOverlay,
             boolean force,
+            @Nullable Frustum frustum,
             Operation<S> original
     ) {
         BlockState material = CogwheelMaterialFunnel.materialOf(blockEntity);
         if (material == null)
-            return original.call(blockEntity, tickProgress, crumblingOverlay, force);
+            return original.call(blockEntity, tickProgress, crumblingOverlay, force, frustum);
 
         CogwheelMaterialFunnel.push(material);
         try {
-            return original.call(blockEntity, tickProgress, crumblingOverlay, force);
+            return original.call(blockEntity, tickProgress, crumblingOverlay, force, frustum);
         } finally {
             CogwheelMaterialFunnel.pop();
         }

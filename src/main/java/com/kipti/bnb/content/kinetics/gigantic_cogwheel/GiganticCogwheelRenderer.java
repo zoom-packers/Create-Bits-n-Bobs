@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.kipti.bnb.registry.client.BnbPartialModels;
 import com.zurrtum.create.client.content.kinetics.base.KineticBlockEntityRenderer;
 import com.zurrtum.create.content.kinetics.base.RotatedPillarKineticBlock;
@@ -37,7 +35,6 @@ import net.minecraft.world.level.block.state.BlockState;
  * Generates wood-type-specific models by replacing template spruce textures
  * with the material's corresponding plank and log sprites.
  */
-@Environment(EnvType.CLIENT)
 public class GiganticCogwheelRenderer
 		extends KineticBlockEntityRenderer<GiganticCogwheelBlockEntity, KineticBlockEntityRenderer.KineticRenderState> {
 

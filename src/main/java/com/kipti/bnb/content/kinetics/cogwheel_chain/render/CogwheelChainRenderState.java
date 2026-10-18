@@ -1,15 +1,12 @@
 package com.kipti.bnb.content.kinetics.cogwheel_chain.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
 public final class CogwheelChainRenderState {
 
     private final CogwheelChainMesh mesh;

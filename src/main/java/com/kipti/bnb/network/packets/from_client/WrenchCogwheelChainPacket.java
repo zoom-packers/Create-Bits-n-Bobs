@@ -1,6 +1,7 @@
 package com.kipti.bnb.network.packets.from_client;
 
 import com.kipti.bnb.content.kinetics.cogwheel_chain.behaviour.CogwheelChainBehaviour;
+import net.minecraft.util.Prediction;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.graph.PlacingCogwheelChain;
 import com.kipti.bnb.network.BnbPackets;
 import com.kipti.bnb.network.ServerboundPacketPayload;
@@ -59,7 +60,7 @@ public record WrenchCogwheelChainPacket(
         final ItemStack drops = behaviour.destroyChain(false, true);
 
         if (!infinite && !drops.isEmpty()) {
-            player.getInventory().placeItemBackInInventory(drops);
+            player.getInventory().placeItemBackInInventory(drops, Prediction.SERVER_ONLY);
         }
     }
 

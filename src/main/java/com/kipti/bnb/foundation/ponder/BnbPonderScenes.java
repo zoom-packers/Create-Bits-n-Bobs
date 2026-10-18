@@ -12,14 +12,11 @@ import com.kipti.bnb.registry.content.blocks.BnbTrinketBlocks;
 import com.kipti.bnb.registry.content.blocks.deco.BnbDecorativeBlocks;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.client.ponder.api.registration.PonderSceneRegistrationHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 
-@Environment(EnvType.CLIENT)
 public class BnbPonderScenes {
 
     public static void register(final PonderSceneRegistrationHelper<Identifier> helper) {

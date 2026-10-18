@@ -4,10 +4,7 @@ import com.kipti.bnb.registry.content.BnbBlockEntities;
 import com.zurrtum.create.client.AllBlockEntityBehaviours;
 import com.zurrtum.create.client.foundation.blockEntity.behaviour.tooltip.KineticTooltipBehaviour;
 import com.zurrtum.create.client.foundation.blockEntity.behaviour.tooltip.LinearActuatorTooltipBehaviour;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
-@Environment(EnvType.CLIENT)
 public final class BnbTooltipBehaviours {
 
     private BnbTooltipBehaviours() {

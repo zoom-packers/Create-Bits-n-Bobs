@@ -4,7 +4,6 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.LevelReader;
 import com.kipti.bnb.registry.content.BnbShapes;
 import com.kipti.bnb.registry.content.blocks.BnbKineticBlocks;
-import com.mojang.serialization.MapCodec;
 import com.zurrtum.create.api.equipment.goggles.IProxyHoveringInformation;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
 
@@ -46,8 +45,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class GiganticCogwheelSatelliteBlock extends DirectionalBlock implements IWrenchable, IProxyHoveringInformation {
 
-    public static final MapCodec<GiganticCogwheelSatelliteBlock> CODEC =
-            simpleCodec(GiganticCogwheelSatelliteBlock::new);
 
     public GiganticCogwheelSatelliteBlock(Properties properties) {
         super(properties);
@@ -141,10 +138,6 @@ public class GiganticCogwheelSatelliteBlock extends DirectionalBlock implements 
         return BnbKineticBlocks.GIGANTIC_COGWHEEL.asStack();
     }
 
-    @Override
-    protected MapCodec<? extends DirectionalBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,

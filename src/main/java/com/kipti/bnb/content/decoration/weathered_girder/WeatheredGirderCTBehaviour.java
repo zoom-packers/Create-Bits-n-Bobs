@@ -2,8 +2,6 @@ package com.kipti.bnb.content.decoration.weathered_girder;
 
 import com.kipti.bnb.registry.client.BnbSpriteShifts;
 import com.zurrtum.create.content.decoration.girder.GirderBlock;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import com.zurrtum.create.client.foundation.block.connected.CTSpriteShiftEntry;
 import com.zurrtum.create.client.foundation.block.connected.ConnectedTextureBehaviour;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,7 +12,6 @@ import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
 public class WeatheredGirderCTBehaviour extends ConnectedTextureBehaviour.Base {
 
     @Override

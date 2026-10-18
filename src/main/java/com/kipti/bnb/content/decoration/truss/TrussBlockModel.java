@@ -2,8 +2,6 @@ package com.kipti.bnb.content.decoration.truss;
 
 import com.kipti.bnb.foundation.client.QuadRotator;
 import com.zurrtum.create.client.infrastructure.model.WrapperBlockStateModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -23,7 +21,6 @@ import java.util.function.BiFunction;
  * The alternation used to travel through {@code ModelData}; on 26.2 the position is handed straight to
  * {@code addPartsWithInfo}, so the parity is computed where the parts are collected.
  */
-@Environment(EnvType.CLIENT)
 public class TrussBlockModel extends WrapperBlockStateModel {
 
     public TrussBlockModel(BlockState state, BlockStateModel.UnbakedRoot wrapped) {

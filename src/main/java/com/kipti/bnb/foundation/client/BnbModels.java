@@ -24,11 +24,8 @@ import com.zurrtum.create.client.infrastructure.model.CTModel;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Function;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 /** Every block state model wrapper the port installs, run once Create Fly has registered its own. */
-@Environment(EnvType.CLIENT)
 public final class BnbModels {
 
     private BnbModels() {

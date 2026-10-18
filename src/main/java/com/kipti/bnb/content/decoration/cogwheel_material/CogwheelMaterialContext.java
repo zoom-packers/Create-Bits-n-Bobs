@@ -7,8 +7,6 @@ import com.zurrtum.create.client.catnip.render.SuperBufferFactory;
 import com.zurrtum.create.client.catnip.render.SuperByteBuffer;
 import com.zurrtum.create.client.catnip.render.SuperByteBufferCache;
 import net.minecraft.client.Minecraft;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +22,6 @@ import java.util.function.Supplier;
  * the context is set. The material-keyed compartment is required because the base {@code KINETIC_BLOCK} compartment
  * is keyed by {@link BlockState} alone and would collide across materials.
  */
-@Environment(EnvType.CLIENT)
 public class CogwheelMaterialContext {
 
     public static final SuperByteBufferCache.Compartment<ModelKey> COGWHEEL_MATERIAL = new SuperByteBufferCache.Compartment<>();

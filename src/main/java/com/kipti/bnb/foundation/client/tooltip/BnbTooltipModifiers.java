@@ -5,12 +5,9 @@ import com.zurrtum.create.client.catnip.lang.FontHelper;
 import com.zurrtum.create.client.foundation.item.ItemDescription;
 import com.zurrtum.create.client.foundation.item.KineticStats;
 import com.zurrtum.create.client.foundation.item.TooltipModifier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 
-@Environment(EnvType.CLIENT)
 public final class BnbTooltipModifiers {
 
     private BnbTooltipModifiers() {

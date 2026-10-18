@@ -9,36 +9,31 @@ import com.kipti.bnb.content.kinetics.cogwheel_chain.placement.CogwheelChainPlac
 import com.kipti.bnb.content.kinetics.cogwheel_chain.riding.CogwheelChainRidingHelper;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.riding.PlayerSkyhookRendererBridge;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.shape.CogwheelChainInteractionHandler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import com.kipti.bnb.neoforge.client.LevelRenderContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ExtractBlockOutlineRenderStateEvent;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * The client half of the interactions upstream drove from NeoForge's client event bus.
  * <p>
- * {@code ClientTickEvent.Post} becomes {@code ClientTickEvents.END_CLIENT_TICK};
- * {@code InputEvent.InteractionKeyMappingTriggered} becomes {@code UseBlockCallback} plus
- * {@code UseItemCallback}, which between them cover a right click with and without a targeted block;
- * {@code RenderHighlightEvent.Block} and the chain's own selection outline both become one
- * {@code LevelRenderEvents.BEFORE_BLOCK_OUTLINE} listener.
+ * NeoForge: the Fabric port's listeners are mapped back to the NeoForge events upstream used:
+ * {@code ClientTickEvent.Post}; {@code InputEvent.InteractionKeyMappingTriggered} for a right click with and without a
+ * targeted block; the chain's selection outline is drawn in {@code SubmitCustomGeometryEvent}, and the vanilla block
+ * outline is hidden through {@code ExtractBlockOutlineRenderStateEvent} while a chain is selected.
  */
-@Environment(EnvType.CLIENT)
 public final class BnbClientEvents {
 
     private BnbClientEvents() {
     }
 
     public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, event -> {
+            final Minecraft client = Minecraft.getInstance();
             WeatheredGirderWrenchBehaviour.tick();
 
             if (client.level == null || client.player == null) {
@@ -51,28 +46,27 @@ public final class BnbClientEvents {
             CogwheelChainPlacementEffect.tick(client.player);
         });
 
-        UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> handleRightClick(player, level, hand));
-        UseItemCallback.EVENT.register(BnbClientEvents::handleRightClick);
+        NeoForge.EVENT_BUS.addListener(InputEvent.InteractionKeyMappingTriggered.class, event -> {
+            if (event.isUseItem() && Minecraft.getInstance().player != null
+                    && CogwheelChainPlacementInteraction.onRightClick(event.getHand())) {
+                event.setSwingHand(false);
+                event.setCanceled(true);
+            }
+        });
 
-        LevelRenderEvents.BEFORE_BLOCK_OUTLINE.register(
-                (context, outlineState) -> CogwheelChainInteractionHandler.beforeBlockOutline(context));
+        NeoForge.EVENT_BUS.addListener(SubmitCustomGeometryEvent.class,
+                event -> CogwheelChainInteractionHandler.beforeBlockOutline(LevelRenderContext.of(event)));
+        NeoForge.EVENT_BUS.addListener(ExtractBlockOutlineRenderStateEvent.class, event -> {
+            if (CogwheelChainInteractionHandler.hasValidSelection())
+                event.setCanceled(true);
+        });
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+        NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> {
             CogwheelChainPlacementInteraction.clearPlacingChain();
             CogwheelChainPartialEditInteractionHandler.clearEditState();
             CogwheelChainRidingHelper.reset();
             PlayerSkyhookRendererBridge.clear();
             CogwheelChainCandidate.clearCache();
         });
-    }
-
-    private static InteractionResult handleRightClick(final Player player, final Level level, final InteractionHand hand) {
-        if (!level.isClientSide() || player != Minecraft.getInstance().player) {
-            return InteractionResult.PASS;
-        }
-
-        return CogwheelChainPlacementInteraction.onRightClick(hand)
-                ? InteractionResult.FAIL
-                : InteractionResult.PASS;
     }
 }

@@ -4,8 +4,6 @@ import com.kipti.bnb.foundation.client.QuadRotator;
 import com.kipti.bnb.registry.client.BnbPartialModels;
 import com.zurrtum.create.client.infrastructure.model.PipeAttachmentModel;
 import com.zurrtum.create.client.infrastructure.model.WrapperBlockStateModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 /** A fluid pipe wearing the truss shell, with the same alternation as a plain truss block. */
-@Environment(EnvType.CLIENT)
 public class TrussPipeBlockModel extends PipeAttachmentModel {
 
     public TrussPipeBlockModel(BlockState state, BlockStateModel.UnbakedRoot wrapped) {

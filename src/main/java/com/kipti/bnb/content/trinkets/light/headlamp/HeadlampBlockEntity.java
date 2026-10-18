@@ -201,7 +201,7 @@ public class HeadlampBlockEntity extends SmartBlockEntity implements SpecialBloc
     protected void read(final ValueInput tag, final boolean clientPacket) {
         super.read(tag, clientPacket);
 
-        if (tag.contains("ccAddressing")) {
+        if (tag.keySet().contains("ccAddressing")) {
             if (addressing == null) {
                 addressing = new CCLightAddressing();
             }

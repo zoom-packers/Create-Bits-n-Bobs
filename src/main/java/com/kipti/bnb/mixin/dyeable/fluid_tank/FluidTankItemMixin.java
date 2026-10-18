@@ -57,13 +57,7 @@ public class FluidTankItemMixin {
         return DyeableBlockItemHelper.wrapSubPlacement(instance, context, DyeableTankBehaviour.TYPE);
     }
 
-    @Inject(method = "updateCustomBlockEntityTag", at = @At("RETURN"))
-    private void bnb$applyDyeToBlockEntity(
-            final BlockPos pos, final Level level, @Nullable final Player player,
-            final ItemStack stack, final BlockState state,
-            final CallbackInfoReturnable<Boolean> cir
-    ) {
-        DyeableBlockItemHelper.applyDyeToBlockEntity(level, pos, level.isClientSide(), player, DyeableTankBehaviour.TYPE);
-    }
+    // 26.3: FluidTankItem no longer overrides the now-static updateCustomBlockEntityTag; the dye is applied to the
+    // tank's block entity from BlockItemMixin#bits_n_bobs$applyDyeToBlockEntity instead.
 
 }

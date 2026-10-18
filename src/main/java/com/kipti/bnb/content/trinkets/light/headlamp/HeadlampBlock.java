@@ -1,13 +1,15 @@
 package com.kipti.bnb.content.trinkets.light.headlamp;
 
 import com.kipti.bnb.foundation.data.DyeColors;
+import net.minecraft.util.Prediction;
 import com.kipti.bnb.registry.content.BnbShapes;
 import com.kipti.bnb.content.trinkets.light.foundation.LightBlock;
 import com.kipti.bnb.registry.content.BnbBlockEntities;
 import com.kipti.bnb.registry.content.blocks.BnbTrinketBlocks;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
 import com.zurrtum.create.foundation.block.IBE;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -106,24 +108,29 @@ public class HeadlampBlock extends LightBlock implements IBE<HeadlampBlockEntity
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(final BlockState state, @NotNull final BlockGetter level, @NotNull final BlockPos pos, @NotNull final CollisionContext context) {
+    public @NotNull VoxelShape getShape(final BlockState state, @NotNull final BlockGetter level, @NotNull final BlockPos pos, @NotNull final CollisionContext context) {
         return level.getBlockEntity(pos) instanceof final HeadlampBlockEntity headlampBlockEntity ?
                 headlampBlockEntity.getShape(state, level, pos, context) :
                 BnbShapes.HEADLAMP_FALLBACK.get(state.getValue(FACING));
     }
 
     public static void registerBreakHandler() {
-        PlayerBlockBreakEvents.BEFORE.register((level, player, pos, state, blockEntity) -> {
+        // NeoForge: PlayerBlockBreakEvents.BEFORE -> BreakBlockEvent. NeoForge fires it on the client too, which
+        // cancels the client's predicted break as upstream (NeoForge) did; only the server pops the item.
+        NeoForge.EVENT_BUS.addListener(BreakBlockEvent.class, event -> {
+            final Player player = event.getPlayer();
+            final BlockState state = event.getState();
+            final BlockPos pos = event.getPos();
             if (player.isCrouching() || !(state.getBlock() instanceof final HeadlampBlock headlamp))
-                return true;
-            if (!(blockEntity instanceof final HeadlampBlockEntity headlampBlockEntity))
-                return true;
+                return;
+            if (!(event.getLevel() instanceof final Level level) || !(level.getBlockEntity(pos) instanceof final HeadlampBlockEntity headlampBlockEntity))
+                return;
             final Vec3 location = headlamp.getPlayerLocationInBlockExact(pos, level, player);
             if (!headlampBlockEntity.removeNearestHeadlamp(location.subtract(Vec3.atCenterOf(pos)), state.getValue(FACING)))
-                return true;
+                return;
             if (!level.isClientSide() && !player.isCreative())
                 HeadlampBlock.popResource(level, pos, BnbTrinketBlocks.HEADLAMP.asStack());
-            return false;
+            event.setCanceled(true);
         });
     }
 
@@ -167,7 +174,7 @@ public class HeadlampBlock extends LightBlock implements IBE<HeadlampBlockEntity
     }
 
     @Override
-    protected @NotNull BlockState rotate(final @NotNull BlockState state, final @NotNull Rotation rotation) {
+    public @NotNull BlockState rotate(final @NotNull BlockState state, final @NotNull Rotation rotation) {
         return super.rotate(state, rotation)
                 .setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
@@ -204,7 +211,7 @@ public class HeadlampBlock extends LightBlock implements IBE<HeadlampBlockEntity
             return InteractionResult.SUCCESS;
 
         if (!player.isCreative()) {
-            Block.getDrops(state, serverLevel, pos, world.getBlockEntity(pos), player, context.getItemInHand()).forEach(itemStack -> player.getInventory().placeItemBackInInventory(itemStack));
+            Block.getDrops(state, serverLevel, pos, world.getBlockEntity(pos), player, context.getItemInHand()).forEach(itemStack -> player.getInventory().placeItemBackInInventory(itemStack, Prediction.SERVER_ONLY));
         }
 
         state.spawnAfterBreak(serverLevel, pos, ItemStack.EMPTY, true);
