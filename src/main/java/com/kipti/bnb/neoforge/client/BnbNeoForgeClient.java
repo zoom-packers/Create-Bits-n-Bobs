@@ -12,9 +12,11 @@ import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,15 +24,24 @@ import java.util.Optional;
 
 /**
  * NeoForge client entrypoint, replacing the Fabric {@code client} entrypoint ({@code fabric/client/BnbFabricClient}).
- * Like Create's, it runs the client initialisation while mods are constructed.
+ * <p>
+ * The client initialisation reads block entity types, items and the renderer hooks that {@link CreateBitsnBobs#init()}
+ * registers from the first {@link RegisterEvent} (see {@code BnbNeoForge}). It can't run while mods are constructed,
+ * as Create's does, so it runs from the same first event at the lowest priority, right after the common one.
  */
 @Mod(value = CreateBitsnBobs.MOD_ID, dist = Dist.CLIENT)
 public final class BnbNeoForgeClient {
+    private static boolean initialised;
 
     public BnbNeoForgeClient(final IEventBus modBus) {
         BnbClientHooks.setBridge(new BnbClientBridge());
         BnbClientNetwork.register(modBus);
-        CreateBitsnBobsClient.initClient(modBus);
+        modBus.addListener(EventPriority.LOWEST, RegisterEvent.class, event -> {
+            if (!initialised) {
+                initialised = true;
+                CreateBitsnBobsClient.initClient(modBus);
+            }
+        });
         modBus.addListener(AddPackFindersEvent.class, BnbNeoForgeClient::addCogwheelItemsPack);
     }
 

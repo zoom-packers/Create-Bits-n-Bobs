@@ -44,7 +44,7 @@ Licence: MIT (see `LICENSE` and `NOTICE`). Mod id `bits_n_bobs`, package `com.ki
 | Fabric | NeoForge |
 |---|---|
 | `main` entrypoint `fabric/BnbFabric` | `@Mod` `neoforge/BnbNeoForge` |
-| `client` entrypoint `fabric/client/BnbFabricClient` | `@Mod(dist = CLIENT)` `neoforge/client/BnbNeoForgeClient`, which runs `CreateBitsnBobsClient.initClient` at mod construction, like Create's client |
+| `client` entrypoint `fabric/client/BnbFabricClient` | `@Mod(dist = CLIENT)` `neoforge/client/BnbNeoForgeClient`, which runs `CreateBitsnBobsClient.initClient` from the first `RegisterEvent` at `EventPriority.LOWEST`, right after `CreateBitsnBobs.init()` (see below) |
 | `create_plugin` entrypoint (`onBlockRegister`) | `META-INF/services/com.zurrtum.create.api.registry.CreateRegisterPlugin` → `neoforge/BnbCreatePlugin`. Blocks and their items still register during vanilla bootstrap, next to Create's |
 | Everything else registered from the mod initializer | `CreateBitsnBobs.init()` runs from the first `RegisterEvent`. NeoForge opens every registry while it posts the `RegisterEvent`s, and only then |
 | `FabricRegistryBuilder` (`BnbRegistries.COGWHEEL_CHAIN_TYPES`) | `RegistryBuilder`, registered in `NewRegistryEvent` |
@@ -52,6 +52,14 @@ Licence: MIT (see `LICENSE` and `NOTICE`). Mod id `bits_n_bobs`, package `com.ki
 | `FabricLoader#isModLoaded` / `isDevelopmentEnvironment` | Create's `com.zurrtum.create.neoforge.Platform#isModLoaded` / `!FMLLoader.getCurrent().isProduction()` |
 | Fabric `ResourceLoader.registerBuiltinPack` ("Material Cogwheel Items") | `AddPackFindersEvent`, always-on built-in client pack from `resourcepacks/cogwheel_items` |
 | `@Environment(EnvType.CLIENT)` (83 files) | removed (NeoForge does not strip classes; client code is only reached from the client entrypoint or `BnbClientHooks`) |
+
+The client initialisation reads block entity types and items, and flushes the renderer hooks the registrate queues
+while registering them, so it must run after `CreateBitsnBobs.init()`. `zp5.1` ran it at mod construction, which
+crashed every client: `BnbTooltipBehaviours` loaded `BnbBlockEntities` before any `RegisterEvent`, and creating a
+`BlockEntityType` outside one throws `Registry is already frozen`. GameTest and dedicated-server runs never construct
+the client entrypoint, so only a client boot shows this (checked in a full-pack client on 2026-10-19 for `zp5.2`).
+Nothing on the client may build an `ItemStack` or `FluidStack` before it joins a world either: on 26.3 the client binds
+item and fluid data components from the server's registry data (`RegistryDataCollector`).
 
 ## Fabric API → NeoForge
 
