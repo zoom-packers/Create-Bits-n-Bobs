@@ -244,5 +244,8 @@
   "tooltip.bits_n_bobs.flywheel_bearing.full": "(full)",
   "tooltip.bits_n_bobs.flywheel_bearing.kinetic_transfer": "Kinetic Transfer:",
   "tooltip.bits_n_bobs.flywheel_bearing.stored_stress": "Stored Stress:",
-  "tooltip.bits_n_bobs.suppressed_cogwheel": "This wooden cogwheel is being hidden due to Bits 'n' Bobs' config"
+  "tooltip.bits_n_bobs.suppressed_cogwheel": "This wooden cogwheel is being hidden due to Bits 'n' Bobs' config",
+  "tag.item.bits_n_bobs.chairs": "Chairs",
+  "tag.item.bits_n_bobs.suppressible_cogwheels": "Suppressible Cogwheels",
+  "tag.item.bits_n_bobs.suppressible_dyed_logistics_components": "Suppressible Dyed Logistics Components"
 }
